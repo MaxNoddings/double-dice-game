@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>
+      Double Dice Decision Game
+    </title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <style>
+      body {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 19px;
+      }
+      
+      .centered-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 50vw; /* 50% of the viewport width */
+        background-color: #f3f3f3bc; 
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.15);
+
+      }
+
+      .title, .dice-zone {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        padding: 5px;
+      }
+
+      .title {
+        font-size: 50px;
+        color: #0080ff;
+        font-family: 'Young Serif', serif;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+      }
+
+      .dice-zone {
+        font-family: 'Roboto', sans-serif;
+      }
+
+      .roll-results, .round-results, .final-results, .new-game {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+        align-items: center;
+        font-family: 'Roboto', sans-serif;
+      }
+
+      .dice1, .dice2, .round1, .round2, .round3, .round4, .round5, .final-score {
+        display: flex;
+        text-align: center;
+        padding: 5px;
+        margin: 3px;
+        justify-content: space-between;
+      }
+
+      .operations {
+        display: flex;
+        justify-content: center;
+      }
+
+      .button {
+        width: 100px;
+        height: 50px;
+        background-color: #4CAF50;
+        color: white;
+        text-align: center;
+        line-height: 50px;
+        cursor: pointer;
+        margin: 10px;
+        box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+      }
+
+      .button:hover {
+        background-color: #679b69;
+      }
+
+      .button:active {
+        background-color: #4CAF50;
+        box-shadow: none;
+      }
+
+      .new-game {
+        cursor: pointer;
+        font-family: 'Roboto', sans-serif;
+        background-color: #04e3f3;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      .new-game:hover {
+        background-color: #04e3f3a1;
+      }
+
+      .new-game:active {
+        background-color: #04e3f3;
+        box-shadow: none;
+      }
+
+      #rollDice {
+        background-color: #ed0606;
+        box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        border-radius: 20px;
+      }
+
+      #rollDice:hover {
+        background-color: #ed0606bb;
+      }
+
+      #rollDice:active {
+        background-color: #ed0606;
+        box-shadow: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="centered-container">
+      <div class="title"> Double Dice Decision </div>
+      <div class="dice-zone">
+        <div class="button" id="rollDice">Roll Dice</div>
+        <div class="roll-results">
+          <div class="dice1">
+            <div> <strong>First Dice:</strong>&nbsp;&nbsp; </div>
+            <div id="dice1Result"> - </div>
+          </div>
+          <div class="dice2">
+            <div> <strong>Second Dice:</strong>&nbsp;&nbsp; </div>
+            <div id="dice2Result"> - </div>
+          </div>
+        </div>
+      </div>
+      <div class="operations">
+        <div class="button" id="button1">×</div>
+        <div class="button" id="button2">÷</div>
+        <div class="button" id="button3">+</div>
+        <div class="button" id="button4">-</div>
+    </div>
+    <div class="round-results">
+      <div class="round1">
+        <div> <strong>Round 1:</strong>&nbsp;&nbsp; </div>
+        <div id="round1Result"> - </div>
+      </div>
+      <div class="round2">
+        <div> <strong>Round 2:</strong>&nbsp;&nbsp; </div>
+        <div id="round2Result"> - </div>
+      </div>
+      <div class="round3">
+        <div> <strong>Round 3:</strong>&nbsp;&nbsp; </div>
+        <div id="round3Result"> - </div>
+      </div>
+      <div class="round4">
+        <div> <strong></strong>Round 4:</strong>&nbsp;&nbsp; </div>
+        <div id="round4Result"> - </div>
+      </div>
+      <div class="round5">
+        <div> <strong>Round 5:</strong>&nbsp;&nbsp; </div>
+        <div id="round5Result"> - </div>
+      </div>
+    </div>
+    <div class="final-results">
+      <div class="final-score">
+        <div> <strong>Final Score:</strong>&nbsp;&nbsp; </div>
+        <div id="finalScoreDiv"> - </div>
+      </div>
+    </div>
+    <div class="new-game" id="newGame"> New Game </div>
+
+  </body>
+</html> 
+
+<script>
+  // Get button elements
+  var button1 = document.getElementById("button1");
+  var button2 = document.getElementById("button2");
+  var button3 = document.getElementById("button3");
+  var button4 = document.getElementById("button4");
+  var rollDiceButton = document.getElementById("rollDice");
+  var newGameButton = document.getElementById("newGame");
+  var result1Div = document.getElementById("dice1Result");
+  var result2Div = document.getElementById("dice2Result");
+  var result1;
+  var result2;
+  var roundCounter = 1;
+  var round1Result;
+  var round2Result;
+  var round3Result;
+  var round4Result;
+  var round5Result;
+  var finalRoundResult;
+  var round1ResultDiv = document.getElementById("round1Result");
+  var round2ResultDiv = document.getElementById("round2Result");
+  var round3ResultDiv = document.getElementById("round3Result");
+  var round4ResultDiv = document.getElementById("round4Result");
+  var round5ResultDiv = document.getElementById("round5Result");
+  var finalRoundResultDiv = document.getElementById("finalScoreDiv");
+
+  // To start out, have buttons disabled
+  disableButtons();
+
+  // Function to simulate rolling dice
+  function rollDice() {
+    // Simulate rolling dice and determine the result
+    result1 = Math.floor(Math.random() * 6) + 1;
+    result2 = Math.floor(Math.random() * 6) + 1;
+
+    // update the innerHTML property of the div with the result
+    result1Div.innerHTML = result1;
+    result2Div.innerHTML = result2;
+
+    console.log("Dice 1: " + result1 + ", Dice 2: " + result2);
+    
+    // Perform your logic based on dice results here
+    disableRollDice();
+    enableButtons();
+    
+  }
+
+  //Function to disable Roll Dice Button
+  function disableRollDice() {
+    rollDiceButton.style.pointerEvents = "none";
+  }
+
+  // Function to enable Roll Dice Button
+  function enableRollDice() {
+    rollDiceButton.style.pointerEvents = "auto";
+  }
+  
+  // Function to disable buttons after clicking
+  function disableButtons() {
+    button1.style.pointerEvents = "none";
+    button2.style.pointerEvents = "none";
+    button3.style.pointerEvents = "none";
+    button4.style.pointerEvents = "none";
+  }
+
+  // function to enable buttons after clicking
+  function enableButtons() {
+    button1.style.pointerEvents = "auto";
+    button2.style.pointerEvents = "auto";
+    button3.style.pointerEvents = "auto";
+    button4.style.pointerEvents = "auto";
+  }
+
+  // Add click event listener to roll dice button
+  rollDiceButton.addEventListener("click", rollDice);
+
+  // Add click event listener to New Game button
+  newGameButton.addEventListener("click", function() {
+    result1 = 0;
+    result1Div.innerHTML = "-";
+    result2 = 0;
+    result2Div.innerHTML = "-";
+    roundCounter = 1;
+    round1Result = 0;
+    round1ResultDiv.innerHTML = "-";
+    round2Result = 0;
+    round2ResultDiv.innerHTML = "-";
+    round3Result = 0;
+    round3ResultDiv.innerHTML = "-";
+    round4Result = 0;
+    round4ResultDiv.innerHTML = "-";
+    round5Result = 0;
+    round5ResultDiv.innerHTML = "-";
+    finalRoundResult = 0;
+    finalRoundResultDiv.innerHTML = "-";
+    button1.style.display = "block";
+    button2.style.display = "block";
+    button3.style.display = "block";
+    button4.style.display = "block";
+    disableButtons();
+    enableRollDice();
+  });
+
+  // Add click event listeners to buttons
+  button1.addEventListener("click", function() {
+    enableRollDice();
+    console.log("Option 1 selected");
+
+    // Perform actions for Option 1 (Multiplication)
+    if (roundCounter == 1) {
+      round1Result = result1 * result2;
+      round1ResultDiv.innerHTML = result1 + " * " + result2 + " = " + round1Result;
+      button1.style.display = "none";
+    }
+    else if (roundCounter == 2) {
+      round2Result = result1 * result2;
+      round2ResultDiv.innerHTML = result1 + " * " + result2 + " = " + round2Result;
+      button1.style.display = "none";
+    }
+    else if (roundCounter == 3) {
+      round3Result = result1 * result2;
+      round3ResultDiv.innerHTML = result1 + " * " + result2 + " = " + round3Result;
+      button1.style.display = "none";
+    }
+    else if (roundCounter == 4) {
+      round4Result = result1 * result2;
+      round4ResultDiv.innerHTML = result1 + " * " + result2 + " = " + round4Result;
+      button1.style.display = "block";
+      button2.style.display = "block";
+      button3.style.display = "block";
+      button4.style.display = "block";
+    }
+    else if (roundCounter == 5) {
+      round5Result = result1 * result2;
+      round5ResultDiv.innerHTML = result1 + " * " + result2 + " = " + round5Result;
+      finalRoundResult = round1Result + round2Result + round3Result + round4Result + round5Result;
+      console.log("Final Score = " + finalRoundResult);
+      finalRoundResultDiv.innerHTML = finalRoundResult;
+    }
+
+    // increment roundCounter
+    roundCounter++;
+ 
+    disableButtons(); // Disable other buttons
+  });
+
+  button2.addEventListener("click", function() {
+    enableRollDice();
+    console.log("Option 2 selected");
+
+    // Perform actions for Option 2
+    if (roundCounter == 1) {
+      if (result1 > result2) {
+        round1Result = Math.floor(result1 / result2);
+        round1ResultDiv.innerHTML = result1 + " / " + result2 + " = " + round1Result;
+      }
+      else {
+        round1Result = Math.floor(result2 / result1);
+        round1ResultDiv.innerHTML = result2 + " / " + result1 + " = " + round1Result;
+      }
+      button2.style.display = "none";
+    }
+    else if (roundCounter == 2) {
+      if (result1 > result2) {
+        round2Result = Math.floor(result1 / result2);
+        round2ResultDiv.innerHTML = result1 + " / " + result2 + " = " + round2Result;
+      }
+      else {
+        round2Result = Math.floor(result2 / result1);
+        round2ResultDiv.innerHTML = result2 + " / " + result1 + " = " + round2Result;
+      }
+      button2.style.display = "none";
+    }
+    else if (roundCounter == 3) {
+      if (result1 > result2) {
+        round3Result = Math.floor(result1 / result2);
+        round3ResultDiv.innerHTML = result1 + " / " + result2 + " = " + round3Result;
+      }
+      else {
+        round3Result = Math.floow(result2 / result1);
+        round3ResultDiv.innerHTML = result2 + " / " + result1 + " = " + round3Result;
+      }
+      button2.style.display = "none";
+    }
+    else if (roundCounter == 4) {
+      if (result1 > result2) {
+        round4Result = Math.floor(result1 / result2);
+        round4ResultDiv.innerHTML = result1 + " / " + result2 + " = " + round4Result;
+      }
+      else {
+        round4Result = Math.floor(result2 / result1);
+        round4ResultDiv.innerHTML = result2 + " / " + result1 + " = " + round4Result;
+      }
+      button1.style.display = "block";
+      button2.style.display = "block";
+      button3.style.display = "block";
+      button4.style.display = "block";
+    }
+    else if (roundCounter == 5) {
+      if (result1 > result2) {
+        round5Result = Math.floor(result1 / result2);
+        round5ResultDiv.innerHTML = result1 + " / " + result2 + " = " + round5Result;
+      }
+      else {
+        round5Result = Math.floor(result2 / result1);
+        round5ResultDiv.innerHTML = result2 + " / " + result1 + " = " + round5Result;
+      }
+      finalRoundResult = round1Result + round2Result + round3Result + round4Result + round5Result;
+      console.log("Final Score = " + finalRoundResult);
+      finalRoundResultDiv.innerHTML = finalRoundResult;
+    }
+
+    // increment roundCounter
+    roundCounter++;
+
+    disableButtons(); // Disable other buttons
+  });
+
+  button3.addEventListener("click", function() {
+    enableRollDice();
+    console.log("Option 3 selected");
+
+    // Perform actions for Option 3
+    if (roundCounter == 1) {
+      round1Result = result1 + result2;
+      round1ResultDiv.innerHTML = result1 + " + " + result2 + " = " + round1Result;
+      button3.style.display = "none";
+
+    }
+    else if (roundCounter == 2) {
+      round2Result = result1 + result2;
+      round2ResultDiv.innerHTML = result1 + " + " + result2 + " = " + round2Result;
+      button3.style.display = "none";
+    }
+    else if (roundCounter == 3) {
+      round3Result = result1 + result2;
+      round3ResultDiv.innerHTML = result1 + " + " + result2 + " = " + round3Result;
+      button3.style.display = "none";
+    }
+    else if (roundCounter == 4) {
+      round4Result = result1 + result2;
+      round4ResultDiv.innerHTML = result1 + " + " + result2 + " = " + round4Result;
+      button1.style.display = "block";
+      button2.style.display = "block";
+      button3.style.display = "block";
+      button4.style.display = "block";
+    }
+    else if (roundCounter == 5) {
+      round5Result = result1 + result2;
+      round5ResultDiv.innerHTML = result1 + " + " + result2 + " = " + round5Result;
+      finalRoundResult = round1Result + round2Result + round3Result + round4Result + round5Result;
+      console.log("Final Score = " + finalRoundResult);
+      finalRoundResultDiv.innerHTML = finalRoundResult;
+    }
+
+    // increment roundCounter
+    roundCounter++;
+
+    disableButtons(); // Disable other buttons
+  });
+
+  button4.addEventListener("click", function() {
+    enableRollDice();
+    console.log("Option 4 selected");
+
+    // Perform actions for Option 4
+    if (roundCounter == 1) {
+      if (result1 > result2) {
+        round1Result = result1 - result2;
+        round1ResultDiv.innerHTML = result1 + " - " + result2 + " = " + round1Result;
+      }
+      else {
+        round1Result = result2 - result1;
+        round1ResultDiv.innerHTML = result2 + " - " + result1 + " = " + round1Result;
+      }
+      button4.style.display = "none";
+    }
+    else if (roundCounter == 2) {
+      if (result1 > result2) {
+        round2Result = result1 - result2;
+        round2ResultDiv.innerHTML = result1 + " - " + result2 + " = " + round2Result;
+      }
+      else {
+        round2Result = result2 - result1;
+        round2ResultDiv.innerHTML = result2 + " - " + result1 + " = " + round2Result;
+      }
+      button4.style.display = "none";
+    }
+    else if (roundCounter == 3) {
+      if (result1 > result2) {
+        round3Result = result1 - result2;
+        round3ResultDiv.innerHTML = result1 + " - " + result2 + " = " + round3Result;
+      }
+      else {
+        round3Result = result2 - result1;
+        round3ResultDiv.innerHTML = result1 + " - " + result2 + " = " + round3Result;
+      }
+      button4.style.display = "none";
+    }
+    else if (roundCounter == 4) {
+      if (result1 > result2) {
+        round4Result = result1 - result2;
+        round4ResultDiv.innerHTML = result1 + " - " + result2 + " = " + round4Result;
+      }
+      else {
+        round4Result = result2 - result1;
+        round4ResultDiv.innerHTML = result2 + " - " + result1 + " = " + round4Result;
+      }
+      button1.style.display = "block";
+      button2.style.display = "block";
+      button3.style.display = "block";
+      button4.style.display = "block";
+    }
+    else if (roundCounter == 5) {
+      if (result1 > result2) {
+        round5Result = result1 - result2;
+        round5ResultDiv.innerHTML = result1 + " - " + result2 + " = " + round5Result;
+      }
+      else {
+        round5Result = result2 - result1;
+        round5ResultDiv.innerHTML = result2 + " - " + result1 + " = " + round5Result;
+      }
+      finalRoundResult = round1Result + round2Result + round3Result + round4Result + round5Result;
+      console.log("Final Score = " + finalRoundResult);
+      finalRoundResultDiv.innerHTML = finalRoundResult;
+    }
+
+    // increment roundCounter
+    roundCounter++;
+ 
+    disableButtons(); // Disable other buttons
+  });
+
+</script>
