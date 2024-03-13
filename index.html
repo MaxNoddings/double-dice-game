@@ -16,6 +16,7 @@
       body {
         margin-top: 20px;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         font-size: 19px;
@@ -132,6 +133,10 @@
         background-color: #ed0606;
         box-shadow: none;
       }
+
+      .rules {
+        max-width: 50vw;
+      }
     </style>
   </head>
 
@@ -156,41 +161,48 @@
         <div class="button" id="button2">÷</div>
         <div class="button" id="button3">+</div>
         <div class="button" id="button4">-</div>
+      </div>
+      <div class="round-results">
+        <div class="round1">
+          <div> <strong>Round 1:</strong>&nbsp;&nbsp; </div>
+          <div id="round1Result"> - </div>
+        </div>
+        <div class="round2">
+          <div> <strong>Round 2:</strong>&nbsp;&nbsp; </div>
+          <div id="round2Result"> - </div>
+        </div>
+        <div class="round3">
+          <div> <strong>Round 3:</strong>&nbsp;&nbsp; </div>
+          <div id="round3Result"> - </div>
+        </div>
+        <div class="round4">
+          <div> <strong></strong>Round 4:</strong>&nbsp;&nbsp; </div>
+          <div id="round4Result"> - </div>
+        </div>
+        <div class="round5">
+          <div> <strong>Round 5:</strong>&nbsp;&nbsp; </div>
+          <div id="round5Result"> - </div>
+        </div>
+      </div>
+      <div class="final-results">
+        <div class="final-score">
+          <div> <strong>Final Score:</strong>&nbsp;&nbsp; </div>
+          <div id="finalScoreDiv"> - </div>
+        </div>
+      </div>
+      <div class="new-game" id="newGame"> New Game </div>
     </div>
-    <div class="round-results">
-      <div class="round1">
-        <div> <strong>Round 1:</strong>&nbsp;&nbsp; </div>
-        <div id="round1Result"> - </div>
-      </div>
-      <div class="round2">
-        <div> <strong>Round 2:</strong>&nbsp;&nbsp; </div>
-        <div id="round2Result"> - </div>
-      </div>
-      <div class="round3">
-        <div> <strong>Round 3:</strong>&nbsp;&nbsp; </div>
-        <div id="round3Result"> - </div>
-      </div>
-      <div class="round4">
-        <div> <strong></strong>Round 4:</strong>&nbsp;&nbsp; </div>
-        <div id="round4Result"> - </div>
-      </div>
-      <div class="round5">
-        <div> <strong>Round 5:</strong>&nbsp;&nbsp; </div>
-        <div id="round5Result"> - </div>
-      </div>
-    </div>
-    <div class="final-results">
-      <div class="final-score">
-        <div> <strong>Final Score:</strong>&nbsp;&nbsp; </div>
-        <div id="finalScoreDiv"> - </div>
-      </div>
-    </div>
-    <div class="new-game" id="newGame"> New Game </div>
-    <div>
+
+    <div class="rules">
       <p> 
-        Rules of the Game:<br>
-        You have 5 rolls, each roll there will be two dice rolled<br>
-        ......
+        Rules of the Game:<br><br>
+        Ultimately, the goal for this game is to get the highest sum of points.<br>
+        The points from each round are added up to produce your final score.<br><br> 
+        1. You have 5 rolls for a total of 5 rounds, each round there will be two dice rolled<br>
+        2. For each round you will have the option to either multiply, divide, subtract, or add the two dice numbers that were rolled.<br>
+        3. After choosing your arithmetic operation for the round, that operation will be taken away from use. <br>
+        4. Once you complete the fourth round, all the arithmetic operations will be used. For the fifth and final round, all the arithmetic operations will come back, and you will be able to use any of them.<br>
+        5. After completing the fifth round, your Final Score will be calculated by adding up each of the scores from every round. 
       </p>
     </div>
 
