@@ -92,7 +92,7 @@
       }
 
       .button:hover {
-        background-color: #da0606;
+        background-color: #4caf4fb4;
       }
 
       .button:active {
@@ -238,8 +238,9 @@
   var round5ResultDiv = document.getElementById("round5Result");
   var finalRoundResultDiv = document.getElementById("finalScoreDiv");
 
-  // To start out, have buttons disabled
+  // To start out, have operator buttons disabled along with New Game button
   disableButtons();
+  disableNewGame();
 
   // Function to simulate rolling dice
   function rollDice() {
@@ -264,6 +265,10 @@
     rollDiceButton.style.pointerEvents = "none";
     rollDiceButton.style.backgroundColor = "lightgray";
     rollDiceButton.style.color = "gray";
+
+    // Remove event listeners
+    rollDiceButton.removeEventListener("mouseenter", rollDiceHover);
+    rollDiceButton.removeEventListener("mouseleave", rollDiceUnhover);
   }
 
   // Function to enable Roll Dice Button
@@ -271,8 +276,12 @@
     rollDiceButton.style.pointerEvents = "auto";
     rollDiceButton.style.backgroundColor = "#ed0606";
     rollDiceButton.style.color = "white";
+
+    // Add event listeners
+    rollDiceButton.addEventListener("mouseenter", rollDiceHover);
+    rollDiceButton.addEventListener("mouseleave", rollDiceUnhover);
   }
-  
+
   // Function to disable buttons after clicking
   function disableButtons() {
     button1.style.pointerEvents = "none";
@@ -287,6 +296,16 @@
     button2.style.color = "gray";
     button3.style.color = "gray";
     button4.style.color = "gray";
+
+    // Remove event listeners
+    button1.removeEventListener("mouseenter", button1Hover);
+    button1.removeEventListener("mouseleave", button1Unhover);
+    button2.removeEventListener("mouseenter", button2Hover);
+    button2.removeEventListener("mouseleave", button2Unhover);
+    button3.removeEventListener("mouseenter", button3Hover);
+    button3.removeEventListener("mouseleave", button3Unhover);
+    button4.removeEventListener("mouseenter", button4Hover);
+    button4.removeEventListener("mouseleave", button4Unhover);
   }
 
   // function to enable buttons after clicking
@@ -303,6 +322,76 @@
     button2.style.color = "white";
     button3.style.color = "white";
     button4.style.color = "white";
+
+    // Add event listeners
+    button1.addEventListener("mouseenter", button1Hover);
+    button1.addEventListener("mouseleave", button1Unhover);
+    button2.addEventListener("mouseenter", button2Hover);
+    button2.addEventListener("mouseleave", button2Unhover);
+    button3.addEventListener("mouseenter", button3Hover);
+    button3.addEventListener("mouseleave", button3Unhover);
+    button4.addEventListener("mouseenter", button4Hover);
+    button4.addEventListener("mouseleave", button4Unhover);
+  }
+
+  // Function to disable New Game Button
+  function disableNewGame() {
+    newGameButton.style.pointerEvents = "none";
+    newGameButton.style.backgroundColor = "lightgray";
+    newGameButton.style.color = "gray";
+
+    // Remove event listeners
+    newGameButton.removeEventListener("mouseenter", newGameHover);
+    newGameButton.removeEventListener("mouseleave", newGameUnhover);
+  }
+
+  // Function to enable New Game Button
+  function enableNewGame() {
+    newGameButton.style.pointerEvents = "auto";
+    newGameButton.style.backgroundColor = "#04e3f3";
+    newGameButton.style.color = "black";
+
+    // Add event listeners
+    newGameButton.addEventListener("mouseenter", newGameHover);
+    newGameButton.addEventListener("mouseleave", newGameUnhover);
+  }
+
+  // Functions for hover effects
+  function rollDiceHover() {
+    rollDiceButton.style.backgroundColor = "#ed0606bb";
+  }
+  function rollDiceUnhover() {
+    rollDiceButton.style.backgroundColor = "#ed0606";
+  }
+  function button1Hover() {
+    button1.style.backgroundColor = "#4caf4fb4";
+  }
+  function button1Unhover() {
+    button1.style.backgroundColor = "#4CAF50";
+  }
+  function button2Hover() {
+    button2.style.backgroundColor = "#4caf4fb4";
+  }
+  function button2Unhover() {
+    button2.style.backgroundColor = "#4CAF50";
+  }
+  function button3Hover() {
+    button3.style.backgroundColor = "#4caf4fb4";
+  }
+  function button3Unhover() {
+    button3.style.backgroundColor = "#4CAF50";
+  }
+  function button4Hover() {
+    button4.style.backgroundColor = "#4caf4fb4";
+  }
+  function button4Unhover() {
+    button4.style.backgroundColor = "#4CAF50";
+  }
+  function newGameHover() {
+    newGameButton.style.backgroundColor = "#04e3f3a1";
+  }
+  function newGameUnhover() {
+    newGameButton.style.backgroundColor = "#04e3f3";
   }
 
   // Add click event listener to roll dice button
@@ -332,6 +421,7 @@
     button3.style.display = "block";
     button4.style.display = "block";
     disableButtons();
+    disableNewGame();
     enableRollDice();
   });
 
@@ -370,6 +460,8 @@
       finalRoundResult = round1Result + round2Result + round3Result + round4Result + round5Result;
       console.log("Final Score = " + finalRoundResult);
       finalRoundResultDiv.innerHTML = finalRoundResult;
+      enableNewGame();
+      disableRollDice();
     }
 
     // increment roundCounter
@@ -442,6 +534,8 @@
       finalRoundResult = round1Result + round2Result + round3Result + round4Result + round5Result;
       console.log("Final Score = " + finalRoundResult);
       finalRoundResultDiv.innerHTML = finalRoundResult;
+      enableNewGame();
+      disableRollDice();
     }
 
     // increment roundCounter
@@ -485,6 +579,8 @@
       finalRoundResult = round1Result + round2Result + round3Result + round4Result + round5Result;
       console.log("Final Score = " + finalRoundResult);
       finalRoundResultDiv.innerHTML = finalRoundResult;
+      enableNewGame();
+      disableRollDice();
     }
 
     // increment roundCounter
@@ -557,6 +653,8 @@
       finalRoundResult = round1Result + round2Result + round3Result + round4Result + round5Result;
       console.log("Final Score = " + finalRoundResult);
       finalRoundResultDiv.innerHTML = finalRoundResult;
+      enableNewGame();
+      disableRollDice();
     }
 
     // increment roundCounter
