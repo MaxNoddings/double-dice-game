@@ -92,7 +92,7 @@
       }
 
       .button:hover {
-        background-color: #679b69;
+        background-color: #da0606;
       }
 
       .button:active {
@@ -262,11 +262,15 @@
   //Function to disable Roll Dice Button
   function disableRollDice() {
     rollDiceButton.style.pointerEvents = "none";
+    rollDiceButton.style.backgroundColor = "lightgray";
+    rollDiceButton.style.color = "gray";
   }
 
   // Function to enable Roll Dice Button
   function enableRollDice() {
     rollDiceButton.style.pointerEvents = "auto";
+    rollDiceButton.style.backgroundColor = "#ed0606";
+    rollDiceButton.style.color = "white";
   }
   
   // Function to disable buttons after clicking
@@ -275,6 +279,14 @@
     button2.style.pointerEvents = "none";
     button3.style.pointerEvents = "none";
     button4.style.pointerEvents = "none";
+    button1.style.backgroundColor = "lightgray";
+    button2.style.backgroundColor = "lightgray";
+    button3.style.backgroundColor = "lightgray";
+    button4.style.backgroundColor = "lightgray";
+    button1.style.color = "gray";
+    button2.style.color = "gray";
+    button3.style.color = "gray";
+    button4.style.color = "gray";
   }
 
   // function to enable buttons after clicking
@@ -283,6 +295,14 @@
     button2.style.pointerEvents = "auto";
     button3.style.pointerEvents = "auto";
     button4.style.pointerEvents = "auto";
+    button1.style.backgroundColor = "#4CAF50";
+    button2.style.backgroundColor = "#4CAF50";
+    button3.style.backgroundColor = "#4CAF50";
+    button4.style.backgroundColor = "#4CAF50";
+    button1.style.color = "white";
+    button2.style.color = "white";
+    button3.style.color = "white";
+    button4.style.color = "white";
   }
 
   // Add click event listener to roll dice button
