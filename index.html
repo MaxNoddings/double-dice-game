@@ -24,6 +24,7 @@
         justify-content: center;
         align-items: center;
         font-size: 19px;
+        font-weight: bold;
       }
       
       .centered-container, .rules {
@@ -176,12 +177,21 @@
           padding: 20px;
         }
 
+        #rollDice {
+          margin-top: 20px;
+          height: 80px;
+        }
+
         .operations {
           flex-direction: column;
         }
 
         .title, h1 {
           font-size: 30px;
+        }
+
+        .rules-text {
+          font-size: 15px;
         }
       }
     </style>
@@ -246,11 +256,11 @@
 
     <div class="rules">
       <h1 id="rules-title">Rules of the Game:</h1>
-      <p> 
+      <p class="rules-text"> 
         The points from each round (5 rounds) are added up to produce your final score.<br>
         Ultimately, the goal for this game is to get the highest sum of points.<br>
       </p>
-      <ol>
+      <ol class="rules-text">
         <li>You have 5 rolls for a total of 5 rounds, each round there will be two dice rolled</li>
         <li>For each round you will have the option to either multiply, divide, subtract, or add the two dice numbers that were rolled.</li>
         <li>After choosing your arithmetic operation for the round, that operation will be taken away from use.</li>
